@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('is_admin')->default(1);
-            $table->boolean('is_mamber')->default(1);
+            $table->boolean('is_member')->default(1);
             $table->string('alamat');
             $table->string('telp');
             $table->date('tgl_lahir');
