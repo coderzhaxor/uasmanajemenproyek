@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2024 at 11:37 AM
+-- Generation Time: Oct 08, 2024 at 02:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `uas_katering`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_transaksi`
+--
+
+CREATE TABLE `detail_transaksi` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_transaksi` bigint(20) UNSIGNED NOT NULL,
+  `id_barang` bigint(20) UNSIGNED NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -54,12 +69,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(16, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(17, '2019_08_19_000000_create_failed_jobs_table', 1),
-(18, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(19, '2024_10_05_060255_pesanan', 2),
-(21, '2014_10_12_000000_create_users_table', 3),
-(22, '2024_10_08_054450_transaksi', 4);
+(23, '2014_10_12_000000_create_users_table', 1),
+(24, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(25, '2019_08_19_000000_create_failed_jobs_table', 1),
+(26, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(27, '2024_10_08_054450_transaksi', 2),
+(29, '2024_10_08_104447_detail_transaksi', 3);
 
 -- --------------------------------------------------------
 
@@ -88,26 +103,6 @@ CREATE TABLE `personal_access_tokens` (
   `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pesanan`
---
-
-CREATE TABLE `pesanan` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `code_pesanan` varchar(255) NOT NULL,
-  `sku_transaksi` varchar(255) NOT NULL,
-  `total_qty` varchar(255) NOT NULL,
-  `total_harga` varchar(255) NOT NULL,
-  `nama_customer` varchar(255) NOT NULL,
-  `alamat` varchar(255) NOT NULL,
-  `no_telp` varchar(255) NOT NULL,
-  `ekspedisi` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -188,15 +183,16 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `is_admin`, `is_mamber`, `alamat`, `telp`, `tgl_lahir`, `is_active`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'winda sukmawati', 'windadhawin@gmail.com', '2024-10-08 07:04:03', '$2a$12$/8b/m2t7VCfXNvXdYn88K.UmgNdmBgQxIcB8oc59wE.CXrtH6CRTi', 1, 0, 'kp.pasir garut', '081223908648', '2014-10-01', 1, 1, NULL, '2024-07-15 12:09:59', '2024-07-15 12:09:59');
-
---
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `detail_transaksi_id_transaksi_foreign` (`id_transaksi`),
+  ADD KEY `detail_transaksi_id_barang_foreign` (`id_barang`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -226,12 +222,6 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `pesanan`
---
-ALTER TABLE `pesanan`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -256,6 +246,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -265,18 +261,12 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `pesanan`
---
-ALTER TABLE `pesanan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -295,7 +285,18 @@ ALTER TABLE `transaksis`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD CONSTRAINT `detail_transaksi_id_barang_foreign` FOREIGN KEY (`id_barang`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `detail_transaksi_id_transaksi_foreign` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksis` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
