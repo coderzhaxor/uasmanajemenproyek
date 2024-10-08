@@ -12,14 +12,11 @@
           <li class="nav-item">
             <a class="nav-link  {{ Request::path() == 'shop'? 'active' : ''; }}" href="/shop">Shop</a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link {{ Request::path() == 'transaksi'? 'active' : ''; }}" href="/transaksi">Transaksi</a>
-          </li>
         </ul>
         <form class="d-flex gap-4 align-items-center" role="search">
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Login | Register</button>
           <div class="notif">
-                <a href="#" class="fs-5 ">
+                <a href="/transaksi" class="fs-5 ">
                     <i class="fa-solid icon-nav fa-bag-shopping "></i>
                 </a>
                 <div class="circle">10</div>

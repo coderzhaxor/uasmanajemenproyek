@@ -11,11 +11,7 @@
             <span class="material-icons">
                 notifications
             </span>
-            <img src="{{ asset('storage/user/'.Auth::user()->foto) }}" class="rounded-circle" style="width:50px;">
-            <div class="d-flex flex-column">
-                <p class="m-0">{{ Auth::user->name }}</p>
-                <p class="m-0" style="font-size:112px">{{ Auth::user->name }}</p>
-            </div>
+            <img src="{{ asset('storage/img/foto.3.webp') }}" class="rounded-circle" style="width:50px;">
         </div>
     </div>
 </nav>

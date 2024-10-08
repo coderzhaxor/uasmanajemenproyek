@@ -20,17 +20,19 @@ class Controller extends BaseController
 
     public function index()
     {
-        $products = Product::all(); // Mengambil semua produk
+        $products = Product::paginate(5); // Mengambil semua produk
         return view('pelanggan.page.home', [
             'products' => $products,
-            'title' => 'shop', // 'title' lebih tepat dari 'tittle'
+            'tittle' => 'shop', // 'title' lebih tepat dari 'tittle'
         ]);
     }
 
 
     public function shop(){
-        return view('pelanggan.page.shop',[
-            'tittle' =>  'shop',
+        $products = Product::paginate(10); // Mengambil semua produk
+        return view('pelanggan.page.shop', [
+            'products' => $products,
+            'tittle' => 'shop', // 'title' lebih tepat dari 'tittle'
         ]);
     }
 
