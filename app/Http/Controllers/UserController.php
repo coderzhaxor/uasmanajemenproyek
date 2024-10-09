@@ -133,37 +133,23 @@ class UserController extends Controller
 
     public function loginProses(Request $request)
     {
-        $dataLogin = [
-            'email'    => $request->email,
-            'password' => $request->password,
-        ];
+        $credentials = $request->only('username', 'password');
 
-        // Find user by email
-        $user = User::where('email', $request->email)->first();
-
-        // Check if user exists and is active
-        if ($user && $user->is_active === 0) {
-            Alert::toast('Kamu belum terdaftar', 'error');
-            return back();
-        }
-
-        // Attempt to log in
-        if (Auth::attempt($dataLogin)) {
-            // Regenerate session to prevent fixation attacks
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $user = Auth::user();
 
-            Alert::toast('Kamu berhasil login', 'success');
-
-            // Check if user is admin or member
-            if ($user->is_admin) {
-                return redirect()->intended('/admin/dashboard'); // Redirect to admin dashboard
-            } else {
-                return redirect()->intended('userManagement'); // Redirect to user dashboard
+            if ($user) {
+                // Redirect berdasarkan role
+                if ($user->is_admin) {
+                    return redirect()->intended('/admin/dashboard'); // Admin dashboard
+                } else {
+                    return redirect()->intended('userManagement'); // User dashboard
+                }
             }
-        } else {
-            Alert::toast('Email dan Password salah', 'error');
-            return back();
         }
+        // If authentication fails
+        return back()->withErrors(['username' => 'Invalid credentials']);
     }
 
     public function logout()

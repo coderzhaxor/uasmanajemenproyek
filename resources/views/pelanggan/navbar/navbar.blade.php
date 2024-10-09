@@ -18,7 +18,7 @@
           <!-- Show username and logout when user is logged in -->
           <span class="navbar-text text-light">{{ Auth::user()->username }}</span>
           <button type="button" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</button>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          <form id="logout-form" action="{{ route('logout.pelanggan') }}" method="POST" style="display: none;">
               @csrf
           </form>
         @else
