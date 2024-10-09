@@ -74,6 +74,8 @@ Route::post('/checkout/prosesPembayaran', [Controller::class, 'prosesPembayaran'
 // Admin login route (GET & POST)
 Route::get('/admin', [Controller::class, 'login'])->name('admin.login'); // Show admin login page
 Route::post('/admin/loginProses', [Controller::class, 'loginProses'])->name('admin.loginProses'); // Handle admin login
+Route::get('/admin/register', [Controller::class, 'showRegisterForm'])->name('register');
+Route::post('/admin/register', [Controller::class, 'registerAdmin'])->name('admin.register');
 
 // Routes for authenticated admins
 Route::group(['middleware' => 'admin'], function () {

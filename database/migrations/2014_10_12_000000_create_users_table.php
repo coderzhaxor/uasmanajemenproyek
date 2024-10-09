@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('is_admin')->default(1);
-            $table->boolean('is_member')->default(1);
+            $table->integer('is_admin');
+            $table->boolean('is_member');
             $table->string('alamat');
             $table->string('telp');
             $table->date('tgl_lahir');
