@@ -29,7 +29,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(UserRequest $request)
+    public function registerPelanggan(UserRequest $request)
     {
         $request->validate([
             'username' => 'required|string|unique:users',
@@ -50,13 +50,13 @@ class UserController extends Controller
         $user->tgl_lahir = $request->tgl_lahir;
         $user->role = $request->role;
         $user->is_admin = $request->role === 1 ? 1 : 0; // Set is_admin based on role
-        $user->is_member = 1; // Default to member
+        $user->is_member = $request->role === 0 ? 1 : 0; // Set is_member based on role
         $user->is_active = 1; // Default to active
 
         $user->save();
 
         Alert::toast('Registration successful!', 'success');
-        return redirect()->route('userManagement');
+        return redirect()->route('home');
     }
 
     public function show($id)
@@ -144,7 +144,7 @@ class UserController extends Controller
                 if ($user->is_admin) {
                     return redirect()->intended('/admin/dashboard'); // Admin dashboard
                 } else {
-                    return redirect()->intended('userManagement'); // User dashboard
+                    return redirect()->intended('home'); // User dashboard
                 }
             }
         }

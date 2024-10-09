@@ -61,9 +61,9 @@ Route::get('/checkOut', [Controller::class, 'keranjang'])->name('keranjang');
 Route::get('/checkOut/{id}', [Controller::class, 'bayar'])->name('keranjang.bayar');
 
 // User login & registration
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+Route::post('/user/store', [UserController::class, 'registerPelanggan'])->name('register.pelanggan');
 Route::post('/login_pelanggan', [UserController::class, 'loginProses'])->name('loginproses.pelanggan');
-Route::get('/logout_pelanggan', [UserController::class, 'logout'])->name('logout.pelanggan');
+Route::post('/logout_pelanggan', [UserController::class, 'logout'])->name('logout.pelanggan');
 
 // Cart and checkout routes
 Route::post('/addTocart', [TransaksiController::class, 'addTocart'])->name('addTocart');

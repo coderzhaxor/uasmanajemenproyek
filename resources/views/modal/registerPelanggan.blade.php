@@ -7,7 +7,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form method="POST" action="{{ route('user.store') }}">
+              <form method="POST" action="{{ route('register.pelanggan') }}">
                   @csrf
                   <input type="hidden" name="role" value="0"> <!-- Default role as User -->
 
@@ -33,7 +33,7 @@
 
                   <div class="mb-3">
                       <label for="telp" class="form-label">No Hp</label>
-                      <input type="text" class="form-control" id="telp" name="telp" placeholder="Masukkan No Telepon Anda" required>
+                      <input type="tel" class="form-control" id="telp" name="telp" pattern="[0-9]{10,}" placeholder="Masukkan No Telepon Anda" required>
                   </div>
 
                   <div class="mb-3">
